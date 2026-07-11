@@ -29,21 +29,7 @@
 
         <div class="collapse navbar-collapse" id="navbarNav">
 
-            <ul class="navbar-nav ml-auto">
-
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('index') }}">
-                        Home
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('add') }}">
-                        Add Task
-                    </a>
-                </li>
-
-            </ul>
+           
 
         </div>
 

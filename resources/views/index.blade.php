@@ -4,16 +4,6 @@
 
 @section('content')
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <div>
-        <h2 class="mb-0">Task Manager</h2>
-        <small class="text-muted">Manage your daily tasks</small>
-    </div>
-
-    <a href="{{ route('add') }}" class="btn btn-success">
-        + Add Task
-    </a>
-</div>
 
 @if(session('add-success'))
     <div class="alert alert-success alert-dismissible fade show">
@@ -37,8 +27,18 @@
 @endif
 
 <div class="card shadow-sm">
-    <div class="card-header bg-dark text-white">
-        Total Tasks: {{ $tasks->count() }}
+    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+
+        <h5 class="mb-0">
+            <span class="badge badge-light ml-2">
+                {{ $tasks->count() }} Tasks
+            </span>
+        </h5>
+
+        <a href="{{ route('add') }}" class="btn btn-success btn-sm">
+            + Add Task
+        </a>
+
     </div>
 
     <div class="card-body p-0">
