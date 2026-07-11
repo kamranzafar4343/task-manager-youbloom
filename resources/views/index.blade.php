@@ -29,7 +29,7 @@
                <td>{{$task -> status ?? ''}}</td>
                
                 <td>
-                 <a href="" class="btn btn-sm btn-warning">
+                 <a href="{{ route('edit', base64_encode($task->id)) }}" class="btn btn-sm btn-warning">
                     Edit
                  </a>
 

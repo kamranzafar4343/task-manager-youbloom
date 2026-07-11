@@ -42,28 +42,38 @@ class TaskController extends Controller
         return redirect()->route('index')->with('success','successfully added');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Task $task)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Task $task)
+    public function edit($id)
     {
-        //
+        $id = base64_decode($id);
+
+        $Data = Task::findOrFail($id);
+
+        return view('edit', compact('Data'));
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Task $task)
+    public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+        'title' => 'required|max:255',
+        'description' => 'required|max:255',
+        'status' => 'required|in:Pending,Completed',
+    ]);
+
+        $Data = Task::findOrFail(base64_decode($id));
+        $Data->title = $validated['title'];
+        $Data->description = $validated['description'];
+        $Data->status = $validated['status'];
+        $Data->save();
+
+        return redirect()->route('index')->with('success','successfully updated');
     }
 
     /**
