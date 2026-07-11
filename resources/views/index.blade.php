@@ -68,19 +68,29 @@
 
                     <td>
 
-                        @if($task->status == 'Completed')
+                    <form action="{{ route('status.update', base64_encode($task->id)) }}" method="POST">
 
-                            <span class="badge badge-success">
-                                Completed
-                            </span>
+                    @csrf
 
-                        @else
+                    <select
+                    name="status"
+                    class="form-control form-control-sm
+                    {{ $task->status == 'Completed' ? 'border-success text-success' : 'border-warning text-warning' }}"
+                    onchange="this.form.submit()">
 
-                            <span class="badge badge-warning">
-                                Pending
-                            </span>
+                    <option value="Pending"
+                    {{ $task->status == 'Pending' ? 'selected' : '' }}>
+                    🟡 Pending
+                    </option>
 
-                        @endif
+                    <option value="Completed"
+                    {{ $task->status == 'Completed' ? 'selected' : '' }}>
+                    🟢 Completed
+                    </option>
+
+                    </select>
+
+                    </form>
 
                     </td>
 
