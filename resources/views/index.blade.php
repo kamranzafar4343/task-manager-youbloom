@@ -7,9 +7,7 @@
 
 
 <!-- Add New Task -->
-<button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createModal">
-    Add Task
-</button>
+<a href="{{ route('add') }}" class="btn btn-sm btn-success">Add Task</a>
 
 
 <table class="table table-bordered table-striped">

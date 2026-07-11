@@ -16,20 +16,30 @@ class TaskController extends Controller
         return view('index', compact('tasks'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+    public function add(){
+
+    $tasks = Task::all();
+    return view('add', compact('tasks'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+    // Store Tasks
+    function store(Request $request){
+
+    // dd($request->all());
+
+         $validated = $request->validate([
+        'title' => 'required|max:255',
+        'description' => 'required|max:255',
+        'status' => 'required|in:Pending,Completed',
+    ]);
+
+        $task = new Task();
+        $task->title = $validated['title'];
+        $task->description = $validated['description'];
+        $task->status = $validated['status'];
+        $task->save();
+
+        return redirect()->route('index')->with('success','successfully added');
     }
 
     /**
