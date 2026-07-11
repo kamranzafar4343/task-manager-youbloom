@@ -39,7 +39,7 @@ class TaskController extends Controller
         $task->status = $validated['status'];
         $task->save();
 
-        return redirect()->route('index')->with('add-success','successfully added');
+        return redirect()->route('index')->with('add-success','Task added successfully');
     }
 
 
@@ -73,14 +73,20 @@ class TaskController extends Controller
         $Data->status = $validated['status'];
         $Data->save();
 
-        return redirect()->route('index')->with('edit-success','successfully updated');
+        return redirect()->route('index')->with('edit-success','Task updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Task $task)
+    public function delete($id)
     {
-        //
+        //  Task::where('id', base64_decode($id))->delete();
+
+        $id = base64_decode($id);
+
+        Task::findOrFail($id)->delete();
+
+         return redirect()->route('index')->with('delete-success','Task deleted successfully');
     }
 }

@@ -6,11 +6,30 @@
 @section('content')
 
 @if(session('add-success'))
-<p class="text-muted">{{ session('add-success') }}</p>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('add-success') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 @endif
 
 @if(session('edit-success'))
-<p class="text-muted">{{ session('edit-success') }}</p>
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        {{ session('edit-success') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif
+
+@if(session('delete-success'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ session('delete-success') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 @endif
 
 <!-- Add New Task -->
@@ -40,7 +59,7 @@
                     Edit
                  </a>
 
-                   <a href="" class="btn btn-sm btn-danger">delete</a>
+                   <a href="{{ route('delete', base64_encode($task->id)) }}" class="btn btn-sm btn-danger">delete</a>
                </td>
 
            </tr>

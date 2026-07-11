@@ -9,3 +9,5 @@ Route::post('/store', [App\Http\Controllers\TaskController::class, 'store'])->na
 
 Route::get('/edit/{id}', [App\Http\Controllers\TaskController::class, 'edit'])->name('edit');
 Route::post('/update/{id}', [App\Http\Controllers\TaskController::class, 'update'])->name('update');
+
+Route::get('/delete/{id}', [App\Http\Controllers\TaskController::class, 'delete'])->name('delete');
