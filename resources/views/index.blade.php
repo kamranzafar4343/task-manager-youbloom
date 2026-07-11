@@ -91,10 +91,69 @@
                             Edit
                         </a>
 
-                        <a href="{{ route('delete', base64_encode($task->id)) }}"
-                           class="btn btn-sm btn-danger">
+                        <button
+                            class="btn btn-sm btn-danger"
+                            data-toggle="modal"
+                            data-target="#deleteModal{{ $task->id }}">
                             Delete
-                        </a>
+                        </button>
+                        <div class="modal fade" id="deleteModal{{ $task->id }}" tabindex="-1" role="dialog">
+
+            <div class="modal-dialog" role="document">
+
+            <div class="modal-content">
+
+            <div class="modal-header bg-danger text-white">
+
+                <h5 class="modal-title">
+                    Delete Task
+                </h5>
+
+                <button type="button" class="close text-white" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <p>
+                    Are you sure you want to delete
+                    <strong>{{ $task->title }}</strong>?
+                </p>
+
+                <p class="text-danger mb-0">
+                    This action cannot be undone.
+                </p>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal">
+
+                    Cancel
+
+                </button>
+
+                <a
+                    href="{{ route('delete', base64_encode($task->id)) }}"
+                    class="btn btn-danger">
+
+                    Delete
+
+                </a>
+
+            </div>
+
+            </div>
+
+            </div>
+
+            </div>
 
                     </td>
 
@@ -111,6 +170,7 @@
                 </tr>
 
             @endforelse
+            
 
             </tbody>
 
