@@ -39,7 +39,7 @@ class TaskController extends Controller
         $task->status = $validated['status'];
         $task->save();
 
-        return redirect()->route('index')->with('success','successfully added');
+        return redirect()->route('index')->with('add-success','successfully added');
     }
 
 
@@ -73,7 +73,7 @@ class TaskController extends Controller
         $Data->status = $validated['status'];
         $Data->save();
 
-        return redirect()->route('index')->with('success','successfully updated');
+        return redirect()->route('index')->with('edit-success','successfully updated');
     }
 
     /**

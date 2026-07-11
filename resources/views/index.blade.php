@@ -5,9 +5,16 @@
 
 @section('content')
 
+@if(session('add-success'))
+<p class="text-muted">{{ session('add-success') }}</p>
+@endif
+
+@if(session('edit-success'))
+<p class="text-muted">{{ session('edit-success') }}</p>
+@endif
 
 <!-- Add New Task -->
-<a href="{{ route('add') }}" class="btn btn-sm btn-success">Add Task</a>
+<a href="{{ route('add') }}" class="btn btn-sm btn-success mb-3">Add Task</a>
 
 
 <table class="table table-bordered table-striped">
