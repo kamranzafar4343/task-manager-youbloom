@@ -4,44 +4,108 @@
 
 @section('content')
 
-@if(session('success'))
-<p class="text-muted">{{ session('success') }}</p>
-@endif
+<div class="row justify-content-center">
 
-<h3>
-    <a href="{{ route('index') }}" class="btn btn-sm btn-primary">
-        See all Tasks
-    </a>
-</h3>
+    <div class="col-md-8">
 
-<form action="{{ route('update', base64_encode($Data->id)) }}" method="post">
-    @csrf
-  <div class="mb-3">
-    <label for="" class="form-label">Title</label>
-    <input type="text" class="form-control" id="title" aria-describedby="" value="{{ $Data->title }}" name="title">
-  </div>
-  
-  <div class="mb-3">
-    <label for="" class="form-label">Description (Optional)</label>
-    <input type="text" class="form-control" id="description" aria-describedby="" value="{{ $Data->description }}" name="description">
-  </div>
+        <div class="d-flex justify-content-between align-items-center mb-3">
 
-  <div class="mb-3">
-    <label for="status" class="form-label">Status</label>
+            <h2 class="mb-0">Edit Task</h2>
 
-    <select class="form-control" id="status" name="status">
-        <option value="">Select Status</option>
-        <option value="Pending" {{ $Data->status == 'Pending' ? 'selected' : '' }}>
-            Pending
-        </option>
-        <option value="Completed" {{ $Data->status == 'Completed' ? 'selected' : '' }}>
-            Completed
-        </option>
-    </select>
+            <a href="{{ route('index') }}" class="btn btn-secondary">
+                ← Back to Tasks
+            </a>
+
+        </div>
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <strong>Please fix the following errors:</strong>
+                <ul class="mb-0 mt-2">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <div class="card shadow-sm">
+
+            <div class="card-header bg-warning text-dark">
+                Update Task
+            </div>
+
+            <div class="card-body">
+
+                <form action="{{ route('update', base64_encode($Data->id)) }}" method="POST">
+
+                    @csrf
+
+                    <div class="form-group">
+                        <label for="title"><strong>Title</strong></label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="title"
+                            name="title"
+                            value="{{ old('title', $Data->title) }}"
+                            placeholder="Enter task title">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description"><strong>Description</strong></label>
+
+                        <textarea
+                            class="form-control"
+                            id="description"
+                            name="description"
+                            rows="4"
+                            placeholder="Enter task description">{{ old('description', $Data->description) }}</textarea>
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="status"><strong>Status</strong></label>
+
+                        <select class="form-control" id="status" name="status">
+
+                            <option value="">Select Status</option>
+
+                            <option value="Pending"
+                                {{ old('status', $Data->status) == 'Pending' ? 'selected' : '' }}>
+                                Pending
+                            </option>
+
+                            <option value="Completed"
+                                {{ old('status', $Data->status) == 'Completed' ? 'selected' : '' }}>
+                                Completed
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="text-right">
+
+                        <a href="{{ route('index') }}" class="btn btn-light">
+                            Cancel
+                        </a>
+
+                        <button type="submit" class="btn btn-warning">
+                            Update Task
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
-    
-  
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
 
 @endsection
